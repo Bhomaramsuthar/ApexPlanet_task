@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advanced Styling & JS Demo</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <header>
+        <nav>
+            <div class="logo">WebDev Pro</div>
+            <ul class="nav-links">
+                <li><a href="#carousel">Carousel</a></li>
+                <li><a href="#api">API Data</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="hero">
+            <h1>Advanced Styling & JavaScript</h1>
+            <p>Explore responsive design, interactive components, and API integration.</p>
+        </section>
+
+        <section id="carousel" class="carousel-container">
+            <h2>Interactive Image Carousel</h2>
+            <div class="carousel">
+                <button class="carousel-btn prev" id="prevBtn">&#10094;</button>
+                <div class="carousel-track-container">
+                    <ul class="carousel-track">
+                        <li class="carousel-slide current-slide">
+                            <img src="https://picsum.photos/id/1018/800/400" alt="Nature 1">
+                            <div class="caption">Serene Nature</div>
+                        </li>
+                        <li class="carousel-slide">
+                            <img src="https://picsum.photos/id/1015/800/400" alt="Nature 2">
+                            <div class="caption">Mountain View</div>
+                        </li>
+                        <li class="carousel-slide">
+                            <img src="https://picsum.photos/id/1019/800/400" alt="Nature 3">
+                            <div class="caption">Blue Sky</div>
+                        </li>
+                    </ul>
+                </div>
+                <button class="carousel-btn next" id="nextBtn">&#10095;</button>
+            </div>
+            <div class="carousel-nav">
+                <button class="carousel-indicator current-indicator"></button>
+                <button class="carousel-indicator"></button>
+                <button class="carousel-indicator"></button>
+            </div>
+        </section>
+
+        <section id="api" class="api-section">
+            <h2>API Data Integration</h2>
+            <div class="api-card">
+                <h3>Joke of the Day</h3>
+                <div id="joke-container">
+                    <p class="setup">Loading...</p>
+                    <p class="punchline"></p>
+                </div>
+                <button id="new-joke-btn">Get Another Joke</button>
+            </div>
+        </section>
+    </main>
+
+
+
+    <script src="script.js"></script>
+</body>
+
+</html>
