@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern JS Quiz App</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <main class="quiz-container">
+        <!-- Progress Bar -->
+        <div class="progress-container" id="progress-container">
+            <div class="progress-bar" id="progress-bar"></div>
+        </div>
+
+        <div class="quiz-content">
+            <!-- Quiz Header -->
+            <header class="quiz-header">
+                <h1 id="question-text">Loading question...</h1>
+                <p id="question-tracker">Question 1 of 5</p>
+            </header>
+
+            <!-- Quiz Options -->
+            <div class="options-grid" id="options-container">
+                <!-- Buttons injected via JS -->
+            </div>
+
+            <!-- Feedback Area -->
+            <div id="feedback-message" class="feedback-message" aria-live="polite"></div>
+
+            <!-- Controls -->
+            <div class="quiz-controls">
+                <button id="next-btn" class="btn btn-primary" style="display: none;">Next Question</button>
+            </div>
+        </div>
+
+        <!-- Final Results Screen (Hidden by default) -->
+        <div id="results-screen" class="results-screen" style="display: none;">
+            <h2>Quiz Completed!</h2>
+            <div class="score-circle">
+                <span id="final-score">0</span>
+                <span class="score-max">/ 5</span>
+            </div>
+            <p id="result-message">Great job!</p>
+            <button id="restart-btn" class="btn btn-primary">Restart Quiz</button>
+        </div>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,306 @@
+/* ==========================================================================
+   CSS Variables (Root Variables)
+   These variables centralize our design tokens for easy maintenance.
+   ========================================================================== */
+:root {
+    /* Colors */
+    --color-primary: #4F46E5;
+    --color-primary-dark: #4338CA;
+    --color-secondary: #10B981;
+    --color-bg: #F9FAFB;
+    --color-text-main: #111827;
+    --color-text-muted: #6B7280;
+    --color-white: #FFFFFF;
+    --color-border: #E5E7EB;
+
+    /* Typography */
+    --font-base: 'Inter', system-ui, -apple-system, sans-serif;
+    --text-sm: 0.875rem;
+    --text-base: 1rem;
+    --text-lg: 1.125rem;
+    --text-xl: 1.25rem;
+    --text-2xl: 1.5rem;
+    --text-3xl: 1.875rem;
+    --text-4xl: 2.25rem;
+    
+    /* Spacing */
+    --spacing-xs: 0.5rem;   /* 8px */
+    --spacing-sm: 1rem;     /* 16px */
+    --spacing-md: 1.5rem;   /* 24px */
+    --spacing-lg: 2rem;     /* 32px */
+    --spacing-xl: 3rem;     /* 48px */
+    --spacing-2xl: 4rem;    /* 64px */
+
+    /* Layout */
+    --container-max: 1200px;
+    --header-height: 70px;
+    
+    /* Shadows & Radii */
+    --radius-md: 8px;
+    --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    --transition-speed: 0.3s;
+}
+
+/* ==========================================================================
+   Base Styles / Mobile First
+   We design for the smallest screen (<600px) by default.
+   ========================================================================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font-base);
+    color: var(--color-text-main);
+    background-color: var(--color-bg);
+    line-height: 1.6;
+    /* Base font size for mobile */
+    font-size: var(--text-base); 
+}
+
+img {
+    max-width: 100%;
+    display: block;
+}
+
+/* Typography */
+h1, h2, h3 {
+    line-height: 1.2;
+    margin-bottom: var(--spacing-sm);
+}
+
+h1 { font-size: var(--text-3xl); }
+h2 { font-size: var(--text-2xl); }
+h3 { font-size: var(--text-xl); }
+p { margin-bottom: var(--spacing-sm); color: var(--color-text-muted); }
+
+/* Buttons */
+.btn {
+    display: inline-block;
+    padding: var(--spacing-xs) var(--spacing-md);
+    border-radius: var(--radius-md);
+    text-decoration: none;
+    font-weight: 600;
+    text-align: center;
+    transition: background-color var(--transition-speed) ease;
+    cursor: pointer;
+    border: none;
+}
+
+.btn-primary {
+    background-color: var(--color-primary);
+    color: var(--color-white);
+}
+
+.btn-primary:hover {
+    background-color: var(--color-primary-dark);
+}
+
+/* Header & Hamburger Navigation */
+.site-header {
+    background-color: var(--color-white);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 var(--spacing-lg);
+    height: var(--header-height);
+    box-shadow: var(--shadow-sm);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.logo {
+    font-size: var(--text-xl);
+    font-weight: 700;
+    color: var(--color-text-main);
+}
+.logo .highlight { color: var(--color-primary); }
+
+.menu-toggle {
+    display: flex; /* Visible on mobile */
+    flex-direction: column;
+    justify-content: space-around;
+    width: 30px;
+    height: 24px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    z-index: 101;
+}
+
+.menu-toggle .hamburger,
+.menu-toggle::before,
+.menu-toggle::after {
+    content: '';
+    display: block;
+    width: 100%;
+    height: 3px;
+    background-color: var(--color-text-main);
+    border-radius: 3px;
+    transition: all 0.3s ease-in-out;
+}
+
+/* Mobile Nav is hidden by default off-canvas or via display:none. Let's use max-height technique */
+.main-nav {
+    position: absolute;
+    top: var(--header-height);
+    left: 0;
+    width: 100%;
+    background-color: var(--color-white);
+    box-shadow: var(--shadow-md);
+    overflow: hidden;
+    max-height: 0;
+    transition: max-height 0.4s ease-in-out;
+}
+
+.main-nav.is-open {
+    max-height: 400px;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    padding: var(--spacing-md) 0;
+    text-align: center;
+}
+
+.nav-links li a {
+    display: block;
+    text-decoration: none;
+    color: var(--color-text-main);
+    font-weight: 500;
+    padding: var(--spacing-sm);
+}
+
+.nav-links li a:hover {
+    color: var(--color-primary);
+    background-color: var(--color-bg);
+}
+
+/* Hero Section */
+.hero {
+    padding: var(--spacing-2xl) var(--spacing-md);
+    background: linear-gradient(135deg, #eef2ff 0%, #e0e7ff 100%);
+    text-align: center;
+}
+
+/* Features Section */
+.features-section {
+    padding: var(--spacing-xl) var(--spacing-md);
+    max-width: var(--container-max);
+    margin: 0 auto;
+}
+
+.section-header {
+    text-align: center;
+    margin-bottom: var(--spacing-xl);
+}
+
+.grid-container {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-lg);
+}
+
+.card {
+    background-color: var(--color-white);
+    padding: var(--spacing-lg);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-md);
+    border: 1px solid var(--color-border);
+    text-align: center;
+    transition: transform 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+.card-icon {
+    font-size: 3rem;
+    margin-bottom: var(--spacing-sm);
+}
+
+/* Footer */
+.site-footer {
+    text-align: center;
+    padding: var(--spacing-lg);
+    background-color: var(--color-text-main);
+    color: var(--color-white);
+}
+.site-footer p { color: var(--color-white); margin: 0; }
+
+/* ==========================================================================
+   Media Queries: Tablet (600px to 1024px)
+   ========================================================================== */
+@media (min-width: 600px) {
+    :root {
+        --text-base: 1.0625rem; 
+        --text-3xl: 2.25rem;
+    }
+
+    .hero {
+        padding: var(--spacing-2xl) var(--spacing-xl);
+    }
+
+    .grid-container {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* ==========================================================================
+   Media Queries: Desktop (>1024px)
+   ========================================================================== */
+@media (min-width: 1024px) {
+    :root {
+        --text-base: 1.125rem;
+        --text-4xl: 3rem;
+    }
+
+    h1 { font-size: var(--text-4xl); }
+
+    .site-header {
+        padding: 0 calc(50vw - (var(--container-max) / 2)); 
+    }
+
+    .menu-toggle {
+        display: none;
+    }
+
+    .main-nav {
+        position: static;
+        max-height: none;
+        width: auto;
+        box-shadow: none;
+        background: transparent;
+        overflow: visible;
+    }
+
+    .nav-links {
+        flex-direction: row;
+        padding: 0;
+        gap: var(--spacing-md);
+    }
+
+    .nav-links li a {
+        padding: var(--spacing-xs);
+    }
+    
+    .nav-links li a:hover {
+        background: transparent;
+    }
+
+    .grid-container {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .hero {
+        padding: 6rem var(--spacing-xl);
+    }
+}

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive Master Layout</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="site-header">
+        <div class="logo">Brand<span class="highlight">Pro</span></div>
+        <button class="menu-toggle" aria-label="Toggle navigation" aria-expanded="false" id="mobile-menu-btn">
+            <span class="hamburger"></span>
+        </button>
+        <nav class="main-nav" id="main-nav">
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#features">Features</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="home" class="hero">
+            <div class="hero-content">
+                <h1>Mastering <br>Responsive Web Design</h1>
+                <p>Learn how to build layouts that look amazing on any device. Mobile-first strategies ensure great performance and user experience everywhere.</p>
+                <a href="#features" class="btn btn-primary">Discover More</a>
+            </div>
+        </section>
+
+        <section id="features" class="features-section">
+            <header class="section-header">
+                <h2>Core Features</h2>
+                <p>Everything you need to create scalable, maintainable interfaces.</p>
+            </header>
+            <div class="grid-container">
+                <article class="card">
+                    <div class="card-icon">📱</div>
+                    <h3>Mobile First</h3>
+                    <p>Start with the smallest screens and progressively enhance for larger devices using min-width media queries.</p>
+                </article>
+                <article class="card">
+                    <div class="card-icon">🎨</div>
+                    <h3>CSS Variables</h3>
+                    <p>Maintain consistent spacing, typography, and colors across your entire project with native CSS custom properties.</p>
+                </article>
+                <article class="card">
+                    <div class="card-icon">⚡</div>
+                    <h3>Semantic HTML</h3>
+                    <p>Improve accessibility and SEO by using meaningful tags like article, section, header, and main.</p>
+                </article>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <p>&copy; 2026 Responsive Master. Built for learning.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Real-Time Weather Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="app-wrapper">
+        <main class="weather-card">
+            <header class="app-header">
+                <h1>Weather Dashboard</h1>
+                <p>Check real-time conditions worldwide</p>
+            </header>
+
+            <form id="search-form" class="search-section">
+                <input type="text" id="city-input" placeholder="Enter city name (e.g. London)" autocomplete="off"
+                    aria-label="City name" required>
+                <button type="submit" class="btn btn-search" id="search-btn">
+                    Search
+                </button>
+            </form>
+
+            <!-- Container for updating UI to user (Errors or Loading) -->
+            <div id="status-message" class="status-message" aria-live="polite"></div>
+
+            <!-- Weather Details Output -->
+            <section id="weather-output" class="weather-output hidden">
+                <div class="location-header">
+                    <h2 id="city-name" class="city-name">--</h2>
+                    <p id="country-name" class="country-name">--</p>
+                </div>
+
+                <div class="weather-main">
+                    <div class="weather-icon-wrapper">
+                        <!-- We'll use emoji or simple symbols to represent icons -->
+                        <div id="weather-icon" class="weather-icon">☀️</div>
+                        <p id="weather-description" class="weather-desc">Clear content</p>
+                    </div>
+                    <div class="temp-wrapper">
+                        <span id="temperature" class="temperature">--</span>
+                        <span class="unit">°C</span>
+                    </div>
+                </div>
+
+                <div class="weather-details">
+                    <div class="detail-box">
+                        <span class="detail-label">Wind Speed</span>
+                        <span id="wind-speed" class="detail-value">-- km/h</span>
+                    </div>
+                    <div class="detail-box">
+                        <span class="detail-label">Humidity</span>
+                        <span id="humidity" class="detail-value">-- %</span>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
