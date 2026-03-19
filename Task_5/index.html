@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="TaskMinder - Premium Task Management Dashboard">
+    <title>TaskMinder | Productivity Dashboard</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    
+    <!-- CSS - Optimized loading -->
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+    
+    <!-- JS - Async execution after parsing -->
+    <script src="js/storage.js" defer></script>
+    <script src="js/components.js" defer></script>
+    <script src="js/app.js" defer></script>
+</head>
+<body class="dark-theme">
+    <div class="app-container">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <div class="logo">
+                    <i class="ph ph-check-circle"></i>
+                    <span>TaskMinder</span>
+                </div>
+                <button class="mobile-menu-close" id="closeSidebar" aria-label="Close menu">
+                    <i class="ph ph-x"></i>
+                </button>
+            </div>
+            
+            <nav class="sidebar-nav">
+                <ul class="nav-list">
+                    <li class="nav-item active" data-filter="all">
+                        <a href="#" class="nav-link">
+                            <i class="ph ph-squares-four"></i>
+                            <span>Dashboard</span>
+                        </a>
+                    </li>
+                    <li class="nav-item" data-filter="pending">
+                        <a href="#" class="nav-link">
+                            <i class="ph ph-clock-countdown"></i>
+                            <span>Pending</span>
+                            <span class="badge" id="pendingCount">0</span>
+                        </a>
+                    </li>
+                    <li class="nav-item" data-filter="completed">
+                        <a href="#" class="nav-link">
+                            <i class="ph ph-check-square"></i>
+                            <span>Completed</span>
+                        </a>
+                    </li>
+                </ul>
+                
+                <div class="nav-section-title">Projects</div>
+                <ul class="nav-list" id="projectList">
+                    <li class="nav-item project" data-project="personal">
+                        <a href="#" class="nav-link">
+                            <span class="color-dot personal"></span>
+                            <span>Personal</span>
+                        </a>
+                    </li>
+                    <li class="nav-item project" data-project="work">
+                        <a href="#" class="nav-link">
+                            <span class="color-dot work"></span>
+                            <span>Work</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+            
+            <div class="sidebar-footer">
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark/light mode">
+                    <i class="ph ph-sun"></i>
+                    <span>Theme</span>
+                </button>
+            </div>
+        </aside>
+        
+        <!-- Main Dashboard View -->
+        <main class="main-content">
+            <!-- Header section -->
+            <header class="top-header">
+                <div class="header-left">
+                    <button class="mobile-menu-open" id="openSidebar" aria-label="Open menu">
+                        <i class="ph ph-list"></i>
+                    </button>
+                    <div class="search-bar">
+                        <i class="ph ph-magnifying-glass"></i>
+                        <input type="text" id="searchInput" placeholder="Search tasks..." aria-label="Search tasks">
+                    </div>
+                </div>
+                <div class="header-right">
+                    <button class="btn btn-primary" id="btnNewTask">
+                        <i class="ph ph-plus"></i>
+                        <span>New Task</span>
+                    </button>
+                    <div class="profile-widget">
+                        <!-- Optimized profile image loading -->
+                        <img src="https://ui-avatars.com/api/?name=User&background=6366f1&color=fff" alt="User Avatar" class="avatar" loading="lazy">
+                    </div>
+                </div>
+            </header>
+            
+            <!-- Dynamic Content Area -->
+            <div class="dashboard-scrollable">
+                <div class="dashboard-header">
+                    <div>
+                        <h1 class="greeting" id="greetingTitle">Hello there!</h1>
+                        <p class="subtitle">You have <span id="headerPendingCount" class="text-highlight">0 tasks</span> to complete today.</p>
+                    </div>
+                    <div class="date-widget">
+                        <i class="ph ph-calendar-blank"></i>
+                        <span id="currentDate"></span>
+                    </div>
+                </div>
+                
+                <!-- Performance Statistics -->
+                <section class="stats-container">
+                    <div class="stat-card glass-card">
+                        <div class="stat-icon bg-indigo">
+                            <i class="ph ph-stack"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3>Total Tasks</h3>
+                            <p class="stat-value" id="statTotal">0</p>
+                        </div>
+                    </div>
+                    <div class="stat-card glass-card">
+                        <div class="stat-icon bg-emerald">
+                            <i class="ph ph-check-circle"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3>Completed</h3>
+                            <p class="stat-value" id="statCompleted">0</p>
+                        </div>
+                    </div>
+                    <div class="stat-card glass-card">
+                        <div class="stat-icon bg-rose">
+                            <i class="ph ph-warning-circle"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3>Overdue</h3>
+                            <p class="stat-value" id="statOverdue">0</p>
+                        </div>
+                    </div>
+                </section>
+                
+                <!-- Main Task List Container -->
+                <section class="tasks-section">
+                    <div class="section-header">
+                        <h2>Recent Tasks</h2>
+                        <div class="filter-dropdown">
+                            <select id="sortTasks" aria-label="Sort tasks">
+                                <option value="newest">Newest First</option>
+                                <option value="oldest">Oldest First</option>
+                                <option value="priority">High Priority</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="task-list" id="taskList">
+                        <!-- Tasks dynamically injected here -->
+                        <div class="empty-state">
+                            <i class="ph ph-clipboard-text"></i>
+                            <h3>No tasks found</h3>
+                            <p>Get started by creating a new task.</p>
+                            <button class="btn btn-outline" id="btnEmptyStateNew">Create Task</button>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </main>
+    </div>
+    
+    <!-- Modal Dialog: Create/Edit Task -->
+    <div class="modal-backdrop hidden" id="taskModal">
+        <div class="modal glass-card">
+            <div class="modal-header">
+                <h2 id="modalTitle">Create New Task</h2>
+                <button class="close-modal" id="closeModal" aria-label="Close modal">
+                    <i class="ph ph-x"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="taskForm" novalidate>
+                    <input type="hidden" id="taskId">
+                    
+                    <div class="form-group">
+                        <label for="taskTitle">Task Title <span class="required">*</span></label>
+                        <input type="text" id="taskTitle" required placeholder="E.g., Design homepage UI" class="form-control">
+                        <div class="error-msg" id="titleError">Title is required.</div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="taskDesc">Description</label>
+                        <textarea id="taskDesc" rows="3" placeholder="Add more details about this task..." class="form-control"></textarea>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group w-50">
+                            <label for="taskDate">Due Date <span class="required">*</span></label>
+                            <input type="date" id="taskDate" required class="form-control">
+                            <div class="error-msg" id="dateError">Date is required.</div>
+                        </div>
+                        <div class="form-group w-50">
+                            <label for="taskPriority">Priority</label>
+                            <select id="taskPriority" class="form-control">
+                                <option value="low">Low</option>
+                                <option value="medium" selected>Medium</option>
+                                <option value="high">High</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="taskProject">Project</label>
+                        <select id="taskProject" class="form-control">
+                            <option value="personal">Personal</option>
+                            <option value="work">Work</option>
+                        </select>
+                    </div>
+                    
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-ghost" id="btnCancelModal">Cancel</button>
+                        <button type="submit" class="btn btn-primary" id="btnSaveTask">Save Task</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Toast Notification System -->
+    <div class="toast-container" id="toastContainer"></div>
+</body>
+</html>
